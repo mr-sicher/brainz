@@ -83,7 +83,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             timeEditText.setClickable(false);
 
 //TODO Rating picker
-            strengthEditText.setText((CharSequence) (strength+""));
+            strengthEditText.setText(Integer.toString(strength));
             strengthEditText.setFocusable(false);
             strengthEditText.setClickable(false);
         }
