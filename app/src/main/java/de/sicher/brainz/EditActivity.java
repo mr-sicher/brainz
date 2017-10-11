@@ -84,7 +84,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             nameEditText.setFocusable(false);
             nameEditText.setClickable(false);
 
-//TODO Clicklistener
             dateEditText.setText(date);
             dateEditText.setFocusable(false);
             dateEditText.setClickable(false);
