@@ -37,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
         final Cursor cursor = helper.getAllData();
         String[] columns = new String[] {
                 DBHelper.TRACKING_COLUMN_TIME,
+                DBHelper.TRACKING_COLUMN_DATE,
                 DBHelper.TRACKING_COLUMN_STRENGTH
         };
         int[] widgets = new int[] {
                 R.id.dataTime,
+                R.id.dataDate,
                 R.id.dataStength
         };
 

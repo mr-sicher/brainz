@@ -116,7 +116,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean deleteData(int id){
         //TODO
+        SQLiteDatabase db = this.getWritableDatabase();
         Toast.makeText(context, "Lösche Daten " + id, Toast.LENGTH_LONG).show();
-        return true;
+        return db.delete(TRACKING_TABLE_NAME, TRACKING_COLUMN_ID + "=" + id, null) > 0;
     }
 }

@@ -3,12 +3,14 @@ package de.sicher.brainz;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,6 +27,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private DBHelper dbHelper ;
+    private Context context;
     EditText nameEditText, dateEditText,timeEditText, strengthEditText;
 
     Button saveButton;
@@ -39,10 +42,18 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
         dataID = getIntent().getIntExtra(MainActivity.EXTRA_DATA_KEY, 0);
 
+        context = this;
+
         setContentView(R.layout.activity_edit);
         nameEditText = (EditText) findViewById(R.id.editTextName);
         dateEditText = (EditText) findViewById(R.id.editTextDate);
+        dateEditText.setClickable(false);
+        dateEditText.setFocusable(false);
+        dateEditText.setOnClickListener(this);
         timeEditText = (EditText) findViewById(R.id.editTextTime);
+        timeEditText.setClickable(false);
+        timeEditText.setFocusable(false);
+        timeEditText.setOnClickListener(this);
         strengthEditText = (EditText) findViewById(R.id.editTextStrength);
 
         saveButton = (Button) findViewById(R.id.saveButton);
@@ -77,10 +88,22 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             dateEditText.setText(date);
             dateEditText.setFocusable(false);
             dateEditText.setClickable(false);
+            dateEditText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
             timeEditText.setText(time);
             timeEditText.setFocusable(false);
             timeEditText.setClickable(false);
+            timeEditText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
 
 //TODO Rating picker
             strengthEditText.setText(Integer.toString(strength));
@@ -102,25 +125,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 nameEditText.setFocusableInTouchMode(true);
                 nameEditText.setClickable(true);
 
-                dateEditText.setEnabled(true);
-                dateEditText.setFocusableInTouchMode(true);
-                dateEditText.setClickable(true);
-                dateEditText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        openDatePicker();
-                    }
-                });
+                dateEditText.setOnClickListener(this);
 
-                timeEditText.setEnabled(true);
-                timeEditText.setFocusableInTouchMode(true);
-                timeEditText.setClickable(true);
-                timeEditText.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        openTimePicker();
-                    }
-                });
+                timeEditText.setOnClickListener(this);
 
                 strengthEditText.setEnabled(true);
                 strengthEditText.setFocusableInTouchMode(true);
@@ -146,6 +153,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 AlertDialog d = builder.create();
                 d.setTitle(getString(R.string.deleteDataDialog));
                 d.show();
+                return;
+            case R.id.editTextDate:
+                openDatePicker();
+                return;
+            case R.id.editTextTime:
+                openTimePicker();
+                return;
+            default:
+                Log.d("ICH HABE NOCH KEIN TAG", "TAG");
         }
     }
 
@@ -185,7 +201,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-        DatePickerDialog dialog = new DatePickerDialog(getApplicationContext(),
+        DatePickerDialog dialog = new DatePickerDialog(EditActivity.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -206,7 +222,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         int mHour = c.get(Calendar.HOUR_OF_DAY);
         int mMinute = c.get(Calendar.MINUTE);
 
-        TimePickerDialog dialog = new TimePickerDialog(getApplicationContext(),
+        TimePickerDialog dialog = new TimePickerDialog(EditActivity.this,
                 new TimePickerDialog.OnTimeSetListener() {
 
                     @Override
