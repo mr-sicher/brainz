@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">brainz</string>
     <string name="APP_TAG">brainzz</string>
+    <string name="addNew">Neuer Eintrag</string>
+    <string name="name">Name</string>
+    <string name="date">Datum</string>
+    <string name="strength">Stärke</string>
+    <string name="save">Speichern</string>
+    <string name="delete">Löschen</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="deleteData">Daten Löschen</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="deleteDataDialog">Daten Löschen</string>
+    <string name="time">Zeit</string>
+
+
 </resources>
